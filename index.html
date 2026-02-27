@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wayne at 50</title>
+
+<!-- WhatsApp preview -->
+<meta property="og:title" content="Wayne at 50">
+<meta property="og:description" content="Celebrate with me!">
+<meta property="og:image" content="preview-image.jpg">
+
+<style>
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  background: #fff;
+  color: #333;
+}
+
+/* Sections hidden by default */
+section {
+  display: none;
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Morning Section - Classy */
+#morning {
+  background: #fdf6e3;
+  color: #333;
+}
+
+#morning h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #8b5e3c;
+}
+
+#morning p {
+  font-size: 1.2rem;
+  max-width: 400px;
+}
+
+/* Evening Section - Fun & Cheeky */
+#evening {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+#evening h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #ffcc00;
+}
+
+#evening p {
+  font-size: 1.2rem;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+/* Google Form iframe styling */
+iframe {
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  height: 600px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+/* Mobile-first text sizing */
+@media (min-width: 600px) {
+  #morning h1, #evening h1 { font-size: 2.5rem; }
+  #morning p, #evening p { font-size: 1.5rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Morning Section -->
+<section id="morning">
+  <h1>Good Morning Celebration</h1>
+  <p>Your presence at my table is the only gift I require. Sharing the morning together is more than enough.</p>
+
+  <!-- Google Form Embed -->
+  <iframe src="https://docs.google.com/forms/d/e/YOUR_MORNING_FORM_ID/viewform?embedded=true">
+    Loading…
+  </iframe>
+</section>
+
+<!-- Evening Section -->
+<section id="evening">
+  <h1>Evening Celebration</h1>
+  <p>No gifts. Just bring yourself, your appetite, and your dance moves!</p>
+
+  <!-- Google Form Embed -->
+  <iframe src="https://docs.google.com/forms/d/e/YOUR_EVENING_FORM_ID/viewform?embedded=true">
+    Loading…
+  </iframe>
+</section>
+
+<script>
+// Show correct section based on URL hash
+document.addEventListener("DOMContentLoaded", function() {
+  const hash = window.location.hash || "#morning";
+  if(hash === "#morning") {
+    document.getElementById("morning").style.display = "flex";
+  } else if(hash === "#evening") {
+    document.getElementById("evening").style.display = "flex";
+  }
+});
+</script>
+
+</body>
+</html>
