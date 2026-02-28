@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wayne's 50 Years - Photo Memories</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slide.zoom-in {
+            animation: zoomIn 5s ease-in-out;
+        }
+
+        .slide.zoom-out {
+            animation: zoomOut 5s ease-in-out;
+        }
+
+        .slide.pan-left {
+            animation: panLeft 5s ease-in-out;
+        }
+
+        .slide.pan-right {
+            animation: panRight 5s ease-in-out;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        @keyframes zoomOut {
+            0% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes panLeft {
+            0% { transform: translateX(5%); }
+            100% { transform: translateX(-5%); }
+        }
+
+        @keyframes panRight {
+            0% { transform: translateX(-5%); }
+            100% { transform: translateX(5%); }
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            z-index: 3;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FFD700, #FF6B6B, #4ECDC4);
+            width: 0%;
+            transition: width 5s linear;
+            z-index: 10;
+        }
+
+        .progress-bar.active {
+            width: 100%;
+        }
+
+        .photo-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .birthday-badge {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #FFD700, #FF6B6B);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Placeholder instructions for when no photos are loaded yet */
+        .placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 5;
+        }
+
+        .placeholder h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+
+        .placeholder p {
+            font-size: 1.5rem;
+            color: #ccc;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .birthday-badge {
+                font-size: 1rem;
+                padding: 15px 20px;
+                top: 20px;
+                left: 20px;
+            }
+
+            .photo-counter {
+                font-size: 1rem;
+                padding: 10px 15px;
+                top: 20px;
+                right: 20px;
+            }
+
+            .slide-caption {
+                font-size: 1.5rem;
+                padding: 15px 30px;
+                bottom: 60px;
+            }
+
+            .controls {
+                bottom: 20px;
+            }
+
+            .control-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .placeholder h1 {
+                font-size: 2rem;
+            }
+
+            .placeholder p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-badge">🎉 Wayne's 50th</div>
+    <div class="photo-counter" id="photoCounter">Photo 1 of 1</div>
+    
+    <div class="slideshow-container" id="slideshow">
+        <!-- Placeholder content - will be replaced when photos are uploaded -->
+        <div class="placeholder">
+            <h1>📸 Photo Slideshow</h1>
+            <p>
+                Upload your photos to the <strong>/images</strong> folder in the GitHub repository.<br>
+                The slideshow will automatically display them with beautiful transitions!<br><br>
+                Supported formats: JPG, PNG, GIF
+            </p>
+        </div>
+    </div>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="controls">
+        <button class="control-btn" onclick="previousSlide()">← Previous</button>
+        <button class="control-btn" onclick="togglePlayPause()" id="playPauseBtn">⏸ Pause</button>
+        <button class="control-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        // Configuration
+        const SLIDE_DURATION = 5000; // 5 seconds per photo
+        const TRANSITIONS = ['zoom-in', 'zoom-out', 'pan-left', 'pan-right'];
+        
+        // Photo captions (optional - add your own)
+        const CAPTIONS = {
+            // Example: 'photo1.jpg': 'Wayne at 5 years old',
+            // Add your own captions here matching your image filenames
+        };
+
+        // List your photo filenames here
+        // When you upload photos, add them to this array
+        const PHOTOS = [
+            // 'images/photo1.jpg',
+            // 'images/photo2.jpg',
+            // 'images/photo3.jpg',
+            // Add more photos here as you upload them
+        ];
+
+        let currentIndex = 0;
+        let slideInterval;
+        let isPlaying = true;
+        let slides = [];
+
+        function initSlideshow() {
+            const container = document.getElementById('slideshow');
+            
+            if (PHOTOS.length === 0) {
+                // Keep placeholder
+                return;
+            }
+
+            // Remove placeholder
+            container.innerHTML = '';
+
+            // Create slides
+            PHOTOS.forEach((photo, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = `Photo ${index + 1}`;
+                
+                slide.appendChild(img);
+
+                // Add caption if available
+                const filename = photo.split('/').pop();
+                if (CAPTIONS[filename]) {
+                    const caption = document.createElement('div');
+                    caption.className = 'slide-caption';
+                    caption.textContent = CAPTIONS[filename];
+                    slide.appendChild(caption);
+                }
+
+                container.appendChild(slide);
+                slides.push(slide);
+            });
+
+            // Show first slide
+            if (slides.length > 0) {
+                showSlide(0);
+                startSlideshow();
+            }
+
+            updateCounter();
+        }
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                TRANSITIONS.forEach(trans => slide.classList.remove(trans));
+            });
+
+            // Show current slide with random transition
+            if (slides[index]) {
+                const randomTransition = TRANSITIONS[Math.floor(Math.random() * TRANSITIONS.length)];
+                slides[index].classList.add('active', randomTransition);
+            }
+
+            // Reset and start progress bar
+            const progressBar = document.getElementById('progressBar');
+            progressBar.classList.remove('active');
+            setTimeout(() => {
+                progressBar.classList.add('active');
+            }, 10);
+
+            updateCounter();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        function previousSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        function startSlideshow() {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, SLIDE_DURATION);
+            isPlaying = true;
+            document.getElementById('playPauseBtn').textContent = '⏸ Pause';
+        }
+
+        function stopSlideshow() {
+            if (slideInterval) clearInterval(slideInterval);
+            isPlaying = false;
+            document.getElementById('playPauseBtn').textContent = '▶ Play';
+        }
+
+        function togglePlayPause() {
+            if (isPlaying) {
+                stopSlideshow();
+            } else {
+                startSlideshow();
+            }
+        }
+
+        function updateCounter() {
+            const counter = document.getElementById('photoCounter');
+            if (slides.length > 0) {
+                counter.textContent = `Photo ${currentIndex + 1} of ${slides.length}`;
+            }
+        }
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === ' ') {
+                e.preventDefault();
+                togglePlayPause();
+            }
+        });
+
+        // Initialize on load
+        window.addEventListener('load', initSlideshow);
+
+        // Auto-hide cursor after 3 seconds of inactivity
+        let cursorTimeout;
+        document.addEventListener('mousemove', () => {
+            document.body.style.cursor = 'default';
+            clearTimeout(cursorTimeout);
+            cursorTimeout = setTimeout(() => {
+                document.body.style.cursor = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

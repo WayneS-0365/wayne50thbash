@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Photos - Wayne's 50th</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #FFD700;
+            --coral: #FF6B6B;
+            --turquoise: #4ECDC4;
+            --deep-blue: #1A535C;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #2C3E50 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--coral) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .camera-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: flash 2s ease-in-out infinite;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .content {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .message {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .upload-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
+            color: white;
+            padding: 1.5rem 4rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.6);
+        }
+
+        .instructions {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 20px;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .instructions ol {
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .instructions li {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .qr-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+        }
+
+        .qr-section h3 {
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .qr-section p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            margin: 1.5rem auto;
+            background: white;
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: #999;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .note {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--turquoise);
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .note strong {
+            color: var(--turquoise);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .note p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+            }
+
+            .upload-button {
+                padding: 1.2rem 3rem;
+                font-size: 1.2rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="camera-icon">📸</div>
+            <h1>Share Your Photos!</h1>
+            <p>Help us capture Wayne's 50th</p>
+        </div>
+
+        <div class="content">
+            <p class="message">
+                We'd love to see the celebration through your eyes!<br>
+                Upload your photos from the party.
+            </p>
+
+            <a href="https://forms.gle/YOUR_PHOTO_UPLOAD_FORM_ID" class="upload-button" target="_blank">
+                📷 Upload Photos
+            </a>
+
+            <div class="instructions">
+                <h3>📱 How to Upload:</h3>
+                <ol>
+                    <li>Click the "Upload Photos" button above</li>
+                    <li>You'll be taken to a Google Form</li>
+                    <li>Click "Add file" to select photos from your phone/camera</li>
+                    <li>You can upload multiple photos at once!</li>
+                    <li>Add your name (optional) so we know who shared</li>
+                    <li>Hit submit and you're done!</li>
+                </ol>
+            </div>
+
+            <div class="qr-section">
+                <h3>📲 Scan to Upload</h3>
+                <p>Scan this QR code with your phone camera:</p>
+                <div class="qr-placeholder">
+                    QR Code will appear here<br>
+                    (Generate after setting up Google Form)
+                </div>
+                <p style="font-size: 0.9rem; color: #999;">Point your camera at the QR code above</p>
+            </div>
+
+            <div class="note">
+                <strong>📝 Note:</strong>
+                <p>
+                    All photos will be collected and shared in a gallery after the event. 
+                    By uploading, you give permission for photos to be used in the birthday celebration materials.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakfast Celebration - Wayne's 50th</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sunrise: #FFB347;
+            --morning-sky: #87CEEB;
+            --warm-cream: #FFF8DC;
+            --coral: #FF7F50;
+            --soft-peach: #FFDAB9;
+            --gold: #FFD700;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(180deg, var(--morning-sky) 0%, var(--warm-cream) 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--sunrise) 0%, var(--coral) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sun-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: sunrise 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes sunrise {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            color: var(--warm-cream);
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .celebration-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--coral);
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .details-box {
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--warm-cream) 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 3px solid var(--sunrise);
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            min-width: 2.5rem;
+        }
+
+        .detail-text {
+            line-height: 1.6;
+        }
+
+        .detail-label {
+            font-weight: 700;
+            color: var(--coral);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .catchy-line {
+            background: var(--gold);
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            font-style: italic;
+        }
+
+        .rsvp-section {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .rsvp-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--sunrise) 100%);
+            color: white;
+            padding: 1.5rem 4rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(255, 127, 80, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rsvp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 127, 80, 0.6);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .contact-info strong {
+            color: var(--coral);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .celebration-text {
+                font-size: 1.6rem;
+            }
+
+            .detail-item {
+                font-size: 1.1rem;
+            }
+
+            .detail-icon {
+                font-size: 1.5rem;
+            }
+
+            .catchy-line {
+                font-size: 1.2rem;
+            }
+
+            .rsvp-button {
+                padding: 1.2rem 3rem;
+                font-size: 1.2rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="sun-icon">☀️</div>
+            <h1>Breakfast Celebration</h1>
+            <p>Join us for a cozy morning feast!</p>
+        </div>
+
+        <div class="content">
+            <p class="celebration-text">
+                Wayne is turning 50 and we're starting the day right!
+            </p>
+
+            <div class="details-box">
+                <div class="detail-item">
+                    <span class="detail-icon">🗓️</span>
+                    <div class="detail-text">
+                        <span class="detail-label">Date</span>
+                        Friday, July 11, 2026
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-icon">⏰</span>
+                    <div class="detail-text">
+                        <span class="detail-label">Time</span>
+                        07:30 for 08:00 (Arrive at 7:30, breakfast at 8:00)
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-icon">📍</span>
+                    <div class="detail-text">
+                        <span class="detail-label">Venue</span>
+                        Infinity Restaurant<br>
+                        Sky Hotel, Cape Town
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-icon">🍳</span>
+                    <div class="detail-text">
+                        <span class="detail-label">Style</span>
+                        Buffet Breakfast - Relaxed & Cozy
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-icon">👕</span>
+                    <div class="detail-text">
+                        <span class="detail-label">Dress Code</span>
+                        Very Casual - Come Comfortable!
+                    </div>
+                </div>
+            </div>
+
+            <div class="catchy-line">
+                "No gifts required – your presence is the present! 🎁"
+            </div>
+
+            <div class="rsvp-section">
+                <a href="https://forms.gle/YOUR_BREAKFAST_FORM_ID" class="rsvp-button">
+                    RSVP Now
+                </a>
+            </div>
+
+            <div class="contact-info">
+                <strong>Questions?</strong> WhatsApp Wayne at<br>
+                <strong>+31 61 3870928</strong><br>
+                <a href="mailto:wsylvester@gmail.com" style="color: var(--coral); text-decoration: none;">wsylvester@gmail.com</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            See you at sunrise! 🌅
+        </div>
+    </div>
+
+    <script>
+        // Add a touch of sparkle on mobile tap
+        document.addEventListener('touchstart', function(e) {
+            const touch = e.touches[0];
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = touch.pageX + 'px';
+            sparkle.style.top = touch.pageY + 'px';
+            sparkle.style.fontSize = '2rem';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'sparkleFloat 1s ease-out forwards';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 1000);
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleFloat {
+                0% { transform: translateY(0) scale(1); opacity: 1; }
+                100% { transform: translateY(-50px) scale(0); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

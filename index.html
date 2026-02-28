@@ -1,126 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wayne at 50</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wayne's 50th Birthday Celebration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- WhatsApp preview -->
-<meta property="og:title" content="Wayne at 50">
-<meta property="og:description" content="Celebrate with me!">
-<meta property="og:image" content="preview-image.jpg">
+        :root {
+            --gold: #D4AF37;
+            --coral: #FF6B6B;
+            --turquoise: #4ECDC4;
+            --sunset: #FFE66D;
+            --deep-blue: #1A535C;
+            --champagne: #F7E7CE;
+        }
 
-<style>
-/* Global Styles */
-body {
-  margin: 0;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.5;
-  background: #fff;
-  color: #333;
-}
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #2C3E50 100%);
+            min-height: 100vh;
+        }
 
-/* Sections hidden by default */
-section {
-  display: none;
-  padding: 20px;
-  min-height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-/* Morning Section - Classy */
-#morning {
-  background: #fdf6e3;
-  color: #333;
-}
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
 
-#morning h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #8b5e3c;
-}
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
 
-#morning p {
-  font-size: 1.2rem;
-  max-width: 400px;
-}
+        .spotlight {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 230, 109, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+            animation: spotlightSweep 15s ease-in-out infinite;
+        }
 
-/* Evening Section - Fun & Cheeky */
-#evening {
-  background: #1a1a1a;
-  color: #fff;
-}
+        @keyframes spotlightSweep {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(50%, 50%) rotate(180deg); }
+        }
 
-#evening h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #ffcc00;
-}
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
 
-#evening p {
-  font-size: 1.2rem;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--coral);
+            position: fixed;
+            animation: confettiFall 4s linear infinite;
+            z-index: 5;
+        }
 
-/* Google Form iframe styling */
-iframe {
-  width: 100%;
-  max-width: 400px;
-  border: none;
-  height: 600px;
-  margin-top: 20px;
-  border-radius: 10px;
-}
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
 
-/* Mobile-first text sizing */
-@media (min-width: 600px) {
-  #morning h1, #evening h1 { font-size: 2.5rem; }
-  #morning p, #evening p { font-size: 1.5rem; }
-}
-</style>
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--sunset) 50%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+            letter-spacing: 0.02em;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.3); }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--champagne);
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--turquoise);
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 4rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.8s both;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .cta-button {
+            position: relative;
+            padding: 1.5rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breakfast-btn {
+            background: linear-gradient(135deg, var(--sunset) 0%, var(--coral) 100%);
+            color: var(--deep-blue);
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        .breakfast-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.6);
+        }
+
+        .dinner-btn {
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
+            color: white;
+            box-shadow: 0 10px 40px rgba(78, 205, 196, 0.4);
+        }
+
+        .dinner-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(78, 205, 196, 0.6);
+        }
+
+        .date-banner {
+            margin-top: 4rem;
+            padding: 2rem 4rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 1.5s both;
+        }
+
+        .date-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--gold);
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .cta-container {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+
+            .date-banner {
+                padding: 1.5rem 2rem;
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnimation 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes sparkleAnimation {
+            0% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease-out 2s both;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="stars" id="stars"></div>
+    <div class="spotlight"></div>
+    <div class="spotlight" style="animation-delay: 3s; animation-duration: 18s;"></div>
+    
+    <div class="container">
+        <h1 class="main-title floating">THE BIG 50</h1>
+        <h2 class="subtitle">Prepare for a Legendary Celebration</h2>
+        <p class="tagline">
+            Wayne Sylvester is turning 50, and it's going to be EPIC!<br>
+            Two exclusive events. One unforgettable milestone.
+        </p>
+        
+        <div class="cta-container">
+            <button class="cta-button breakfast-btn" onclick="window.location.href='breakfast.html'">
+                <span>☀️ Breakfast Celebration</span>
+            </button>
+            <button class="cta-button dinner-btn" onclick="window.location.href='dinner.html'">
+                <span>🌙 Evening Soirée</span>
+            </button>
+        </div>
 
-<!-- Morning Section -->
-<section id="morning">
-  <h1>Good Morning Celebration</h1>
-  <p>Your presence at my table is the only gift I require. Sharing the morning together is more than enough.</p>
+        <div class="date-banner">
+            <p class="date-text">July 11, 2026</p>
+        </div>
+    </div>
 
-  <!-- Google Form Embed -->
-  <iframe src="https://docs.google.com/forms/d/e/YOUR_MORNING_FORM_ID/viewform?embedded=true">
-    Loading…
-  </iframe>
-</section>
+    <div class="footer">
+        ✨ Celebrating 50 Years of Awesome ✨
+    </div>
 
-<!-- Evening Section -->
-<section id="evening">
-  <h1>Evening Celebration</h1>
-  <p>No gifts. Just bring yourself, your appetite, and your dance moves!</p>
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
 
-  <!-- Google Form Embed -->
-  <iframe src="https://docs.google.com/forms/d/e/YOUR_EVENING_FORM_ID/viewform?embedded=true">
-    Loading…
-  </iframe>
-</section>
+        // Create confetti
+        function createConfetti() {
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 4 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                
+                const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#D4AF37'];
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 8000);
+            }
+        }
 
-<script>
-// Show correct section based on URL hash
-document.addEventListener("DOMContentLoaded", function() {
-  const hash = window.location.hash || "#morning";
-  if(hash === "#morning") {
-    document.getElementById("morning").style.display = "flex";
-  } else if(hash === "#evening") {
-    document.getElementById("evening").style.display = "flex";
-  }
-});
-</script>
+        setInterval(createConfetti, 2000);
+        createConfetti();
 
+        // Sparkle effect on mouse move
+        let sparkleTimeout;
+        document.addEventListener('mousemove', (e) => {
+            clearTimeout(sparkleTimeout);
+            sparkleTimeout = setTimeout(() => {
+                if (Math.random() > 0.7) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = e.pageX + 'px';
+                    sparkle.style.top = e.pageY + 'px';
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1000);
+                }
+            }, 50);
+        });
+    </script>
 </body>
 </html>
