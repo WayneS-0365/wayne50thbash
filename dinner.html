@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evening Soirée - Wayne's 50th</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,223 +13,125 @@
         }
 
         :root {
-            --electric-blue: #00D9FF;
-            --hot-pink: #FF006E;
-            --neon-yellow: #FFBE0B;
-            --deep-purple: #3A0CA3;
-            --midnight: #1A1A2E;
+            --gold: #D4AF37;
+            --coral: #FF6B6B;
+            --turquoise: #4ECDC4;
+            --sunset: #FFE66D;
+            --deep-blue: #1A535C;
+            --champagne: #F7E7CE;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--midnight);
-            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #2C3E50 100%);
+            min-height: 100vh;
         }
 
-        /* Password Screen */
-        .password-screen {
+        .stars {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--deep-purple) 0%, var(--midnight) 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 2rem;
-        }
-
-        .password-screen.hidden {
-            display: none;
-        }
-
-        .lock-icon {
-            font-size: 5rem;
-            margin-bottom: 2rem;
-            animation: lockPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes lockPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .password-screen h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-            text-align: center;
-        }
-
-        .password-screen p {
-            color: var(--electric-blue);
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .password-input-container {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .password-input {
-            width: 100%;
-            padding: 1.5rem;
-            font-size: 1.3rem;
-            border: 3px solid var(--electric-blue);
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.5em;
-            backdrop-filter: blur(10px);
-        }
-
-        .password-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: normal;
-        }
-
-        .password-input:focus {
-            outline: none;
-            border-color: var(--neon-yellow);
-            box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
-        }
-
-        .password-submit {
-            margin-top: 1.5rem;
-            padding: 1.2rem 4rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--hot-pink) 0%, var(--deep-purple) 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all 0.3s ease;
-        }
-
-        .password-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
-        }
-
-        .error-message {
-            color: var(--hot-pink);
-            margin-top: 1rem;
-            font-size: 1rem;
-            display: none;
-        }
-
-        /* Main Content */
-        .main-content {
-            display: none;
-        }
-
-        .main-content.visible {
-            display: block;
-        }
-
-        .neon-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 217, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 217, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
             pointer-events: none;
             z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .spotlight {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 230, 109, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+            animation: spotlightSweep 15s ease-in-out infinite;
+        }
+
+        @keyframes spotlightSweep {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(50%, 50%) rotate(180deg); }
         }
 
         .container {
             position: relative;
             z-index: 10;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
         }
 
-        .party-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeInDown 1s ease-out;
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--coral);
+            animation: confettiFall 4s linear infinite;
+            z-index: 5;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
                 opacity: 1;
-                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
             }
         }
 
-        .disco-ball {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            animation: spin 4s linear infinite;
-            display: inline-block;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .party-header h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(3rem, 8vw, 5rem);
-            background: linear-gradient(135deg, var(--electric-blue) 0%, var(--hot-pink) 50%, var(--neon-yellow) 100%);
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--sunset) 50%, var(--coral) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-            animation: glow 2s ease-in-out infinite alternate;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            letter-spacing: 0.02em;
         }
 
-        @keyframes glow {
-            0% { filter: drop-shadow(0 0 10px var(--electric-blue)); }
-            100% { filter: drop-shadow(0 0 30px var(--hot-pink)); }
+        @keyframes titleGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.3); }
         }
 
-        .party-header p {
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 300;
-        }
-
-        .event-card {
-            background: rgba(26, 26, 46, 0.9);
-            border: 3px solid var(--electric-blue);
-            border-radius: 30px;
-            padding: 3rem 2rem;
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--champagne);
+            text-align: center;
             margin-bottom: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
-            animation: slideInUp 1s ease-out 0.3s both;
-            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.5s both;
         }
 
-        @keyframes slideInUp {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -238,194 +140,435 @@
         }
 
         .tagline {
-            font-size: 1.8rem;
-            color: var(--neon-yellow);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--turquoise);
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.8s both;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .event-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 1.2s both;
+            margin-bottom: 3rem;
+        }
+
+        .event-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--deep-blue);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+        }
+
+        .details-prose {
+            color: #333;
+            font-size: 1.3rem;
+            line-height: 2;
             text-align: center;
             margin-bottom: 2rem;
-            font-weight: 600;
-            line-height: 1.4;
         }
 
-        .detail-grid {
-            display: grid;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: flex-start;
-            background: rgba(0, 217, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--hot-pink);
-        }
-
-        .detail-icon {
-            font-size: 2.5rem;
-            margin-right: 1.5rem;
-            min-width: 3rem;
-        }
-
-        .detail-content {
-            flex: 1;
-        }
-
-        .detail-label {
-            font-size: 0.9rem;
-            color: var(--electric-blue);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
+        .details-prose strong {
+            color: var(--deep-blue);
             font-weight: 600;
         }
 
-        .detail-value {
-            font-size: 1.3rem;
-            color: white;
-            line-height: 1.6;
+        .details-prose .highlight {
+            color: var(--coral);
+            font-weight: 600;
+        }
+
+        .venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            text-align: center;
+            margin: 2rem 0 1rem;
+            font-weight: 700;
         }
 
         .venue-link {
-            color: var(--neon-yellow);
+            color: var(--turquoise);
             text-decoration: none;
-            border-bottom: 2px solid var(--neon-yellow);
+            border-bottom: 2px solid var(--turquoise);
             transition: all 0.3s ease;
         }
 
         .venue-link:hover {
-            color: var(--hot-pink);
-            border-color: var(--hot-pink);
+            color: var(--coral);
+            border-color: var(--coral);
         }
 
-        .catchy-banner {
-            background: linear-gradient(135deg, var(--hot-pink) 0%, var(--deep-purple) 100%);
+        .venue-address {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .special-note {
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
             color: white;
             padding: 2rem;
             border-radius: 20px;
             text-align: center;
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2.5rem 0;
             font-style: italic;
-            animation: slideInUp 1s ease-out 0.6s both;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
         }
 
-        .rsvp-section {
+        .milestone-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--gold);
             text-align: center;
-            animation: slideInUp 1s ease-out 0.9s both;
+            margin: 2.5rem 0;
+            font-weight: 700;
+            font-style: italic;
         }
 
-        .rsvp-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--electric-blue) 0%, var(--hot-pink) 100%);
-            color: white;
-            padding: 1.8rem 5rem;
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
-            transition: all 0.3s ease;
+        .cta-container {
+            display: flex;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 1.5s both;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            position: relative;
+            padding: 1.5rem 4rem;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            position: relative;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
+            color: white;
+            box-shadow: 0 10px 40px rgba(78, 205, 196, 0.4);
         }
 
-        .rsvp-button::before {
+        .cta-button::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             width: 0;
             height: 0;
-            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
 
-        .rsvp-button:hover::before {
-            width: 400px;
-            height: 400px;
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
-        .rsvp-button span {
+        .cta-button span {
             position: relative;
             z-index: 1;
         }
 
-        .rsvp-button:hover {
+        .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.6);
+            box-shadow: 0 15px 50px rgba(78, 205, 196, 0.6);
         }
 
-        .contact-box {
+        .contact-section {
             text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: rgba(255, 190, 11, 0.1);
-            border-radius: 20px;
-            border: 2px solid var(--neon-yellow);
-        }
-
-        .contact-box p {
-            color: white;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
         }
 
-        .contact-box strong {
-            color: var(--neon-yellow);
+        .contact-section strong {
+            color: var(--deep-blue);
         }
 
-        .contact-box a {
-            color: var(--electric-blue);
+        .contact-section a {
+            color: var(--turquoise);
             text-decoration: none;
-            transition: color 0.3s ease;
+            border-bottom: 1px solid var(--turquoise);
+            transition: all 0.3s ease;
         }
 
-        .contact-box a:hover {
-            color: var(--hot-pink);
+        .contact-section a:hover {
+            color: var(--coral);
+            border-color: var(--coral);
+        }
+
+        .date-banner {
+            margin-top: 3rem;
+            padding: 2rem 4rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 1.8s both;
+        }
+
+        .date-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--gold);
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease-out 2s both;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Password Modal */
+        .password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .password-modal.active {
+            display: flex;
+        }
+
+        .password-box {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .password-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+
+        .password-box p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            border: 3px solid var(--turquoise);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.3em;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .password-submit {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .password-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+        }
+
+        .error-message {
+            color: var(--coral);
+            margin-top: 1rem;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #999;
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: #f0f0f0;
+            color: #333;
         }
 
         @media (max-width: 768px) {
-            .party-header h1 {
-                font-size: 2.5rem;
-            }
-
-            .tagline {
-                font-size: 1.4rem;
-            }
-
-            .detail-value {
-                font-size: 1.1rem;
-            }
-
-            .catchy-banner {
-                font-size: 1.3rem;
-            }
-
-            .rsvp-button {
-                padding: 1.4rem 3rem;
-                font-size: 1.3rem;
-            }
-
-            .event-card {
+            .event-section {
                 padding: 2rem 1.5rem;
+            }
+
+            .details-prose {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .special-note {
+                font-size: 1.2rem;
+                padding: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 1.2rem 3rem;
+                font-size: 1.2rem;
+            }
+
+            .date-banner {
+                padding: 1.5rem 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Password Screen -->
-    <div class="password-screen" id="passwordScreen">
-        <div class="lock-icon">🔒</div>
-        <h2>EXCLUSIVE ACCESS</h2>
-        <p>Enter the password to view your invitation</p>
-        <div class="password-input-container">
+    <div class="stars" id="stars"></div>
+    <div class="spotlight"></div>
+    <div class="spotlight" style="animation-delay: 3s; animation-duration: 18s;"></div>
+    
+    <div class="container">
+        <h1 class="main-title floating">THE BIG 50</h1>
+        <h2 class="subtitle">Prepare for a Legendary Celebration</h2>
+        <p class="tagline">
+            Wayne Sylvester is turning 50, and it's going to be EPIC!
+        </p>
+        
+        <div class="event-section">
+            <h3 class="event-title">Evening Soirée</h3>
+            
+            <div class="details-prose">
+                Join us for an <strong>exclusive evening celebration</strong> at Cape Town's most sophisticated rooftop venue.
+                As the sun sets over the city, we'll toast to <span class="highlight">five decades of memories</span> and the adventures still to come.
+            </div>
+
+            <div class="venue-name"><a href="https://theterracerooftop.co.za" target="_blank" class="venue-link">The Terrace Rooftop</a></div>
+            <div class="venue-address">
+                Cape Town
+            </div>
+
+            <div class="details-prose">
+                <strong>Friday, 11 July 2026</strong><br>
+                <span class="highlight">5:00 PM</span> — Arrival Drinks<br>
+                <span class="highlight">6:00 PM</span> — Dinner Served<br>
+                <strong>Dress Code:</strong> Very Casual
+            </div>
+
+            <div class="special-note">
+                No gifts allowed — Just bring your appetite & good vibes
+            </div>
+
+            <div class="milestone-text">
+                One Unforgettable Milestone
+            </div>
+
+            <div class="cta-container">
+                <button class="cta-button" onclick="showPasswordModal()">
+                    <span>RSVP Now</span>
+                </button>
+            </div>
+
+            <div class="contact-section">
+                <strong>Questions?</strong><br>
+                WhatsApp Wayne at <strong>+31 61 3870928</strong><br>
+                <a href="mailto:wsylvester@gmail.com">wsylvester@gmail.com</a>
+            </div>
+        </div>
+
+        <div class="date-banner">
+            <p class="date-text">July 11, 2026</p>
+        </div>
+
+        <div class="footer">
+            Celebrating 50 Years of Awesome
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-box" style="position: relative;">
+            <button class="close-modal" onclick="closePasswordModal()">×</button>
+            <h2>RSVP Access</h2>
+            <p>Enter the password to submit your RSVP</p>
             <input 
                 type="password" 
                 id="passwordInput" 
@@ -433,104 +576,66 @@
                 placeholder="Enter password"
                 autocomplete="off"
             >
-        </div>
-        <button class="password-submit" onclick="checkPassword()">UNLOCK</button>
-        <p class="error-message" id="errorMessage">Incorrect password. Try again!</p>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content" id="mainContent">
-        <div class="neon-grid"></div>
-        
-        <div class="container">
-            <div class="party-header">
-                <div class="disco-ball">🪩</div>
-                <h1>EVENING SOIRÉE</h1>
-                <p>An Exclusive 50th Birthday Celebration</p>
-            </div>
-
-            <div class="event-card">
-                <p class="tagline">
-                    It's time to celebrate Wayne turning 50 in style!
-                </p>
-
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <span class="detail-icon">📅</span>
-                        <div class="detail-content">
-                            <div class="detail-label">Date</div>
-                            <div class="detail-value">Friday, July 11, 2026</div>
-                        </div>
-                    </div>
-
-                    <div class="detail-item">
-                        <span class="detail-icon">🕔</span>
-                        <div class="detail-content">
-                            <div class="detail-label">Time</div>
-                            <div class="detail-value">
-                                17:00 - Arrival Drinks<br>
-                                18:00 - Dinner Served
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-item">
-                        <span class="detail-icon">📍</span>
-                        <div class="detail-content">
-                            <div class="detail-label">Venue</div>
-                            <div class="detail-value">
-                                <a href="https://colorboxstudios.co.za" target="_blank" class="venue-link">
-                                    Color Box Studios
-                                </a><br>
-                                Cape Town
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-item">
-                        <span class="detail-icon">👔</span>
-                        <div class="detail-content">
-                            <div class="detail-label">Dress Code</div>
-                            <div class="detail-value">Very Casual - Let's Keep It Relaxed!</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="catchy-banner">
-                    "No gifts allowed – Just bring your appetite & good vibes! 🎉"
-                </div>
-
-                <div class="rsvp-section">
-                    <a href="https://forms.gle/YOUR_DINNER_FORM_ID" class="rsvp-button">
-                        <span>🎊 RSVP NOW 🎊</span>
-                    </a>
-                </div>
-
-                <div class="contact-box">
-                    <p><strong>Questions?</strong></p>
-                    <p>WhatsApp Wayne: <strong>+31 61 3870928</strong></p>
-                    <p><a href="mailto:wsylvester@gmail.com">wsylvester@gmail.com</a></p>
-                </div>
-            </div>
+            <button class="password-submit" onclick="checkPassword()">Continue</button>
+            <p class="error-message" id="errorMessage">Incorrect password. Try again!</p>
         </div>
     </div>
 
     <script>
-        // Password protection
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create confetti
+        function createConfetti() {
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 4 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                
+                const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#D4AF37'];
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 8000);
+            }
+        }
+
+        setInterval(createConfetti, 2000);
+        createConfetti();
+
+        // Password modal functions
         const correctPassword = "turning50";
-        
+
+        function showPasswordModal() {
+            document.getElementById('passwordModal').classList.add('active');
+            document.getElementById('passwordInput').focus();
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
         function checkPassword() {
             const input = document.getElementById('passwordInput');
             const errorMsg = document.getElementById('errorMessage');
-            const passwordScreen = document.getElementById('passwordScreen');
-            const mainContent = document.getElementById('mainContent');
             
             if (input.value.toLowerCase() === correctPassword) {
-                passwordScreen.classList.add('hidden');
-                mainContent.classList.add('visible');
-                
-                // Store in sessionStorage so they don't need to enter again this session
-                sessionStorage.setItem('dinnerAccess', 'granted');
+                // Correct password - redirect to Google Form
+                window.open('https://forms.gle/YOUR_DINNER_FORM_ID', '_blank');
+                closePasswordModal();
             } else {
                 errorMsg.style.display = 'block';
                 input.value = '';
@@ -541,16 +646,17 @@
             }
         }
 
-        // Check if already authenticated this session
-        if (sessionStorage.getItem('dinnerAccess') === 'granted') {
-            document.getElementById('passwordScreen').classList.add('hidden');
-            document.getElementById('mainContent').classList.add('visible');
-        }
-
         // Allow Enter key to submit password
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkPassword();
+            }
+        });
+
+        // Close modal on background click
+        document.getElementById('passwordModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePasswordModal();
             }
         });
 

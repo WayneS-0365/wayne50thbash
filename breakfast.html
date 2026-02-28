@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breakfast Celebration - Wayne's 50th</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,35 +13,125 @@
         }
 
         :root {
-            --sunrise: #FFB347;
-            --morning-sky: #87CEEB;
-            --warm-cream: #FFF8DC;
-            --coral: #FF7F50;
-            --soft-peach: #FFDAB9;
-            --gold: #FFD700;
+            --gold: #D4AF37;
+            --coral: #FF6B6B;
+            --turquoise: #4ECDC4;
+            --sunset: #FFE66D;
+            --deep-blue: #1A535C;
+            --champagne: #F7E7CE;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
-            background: linear-gradient(180deg, var(--morning-sky) 0%, var(--warm-cream) 100%);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #2C3E50 100%);
             min-height: 100vh;
-            padding: 2rem 1rem;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .spotlight {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 230, 109, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+            animation: spotlightSweep 15s ease-in-out infinite;
+        }
+
+        @keyframes spotlightSweep {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(50%, 50%) rotate(180deg); }
         }
 
         .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            animation: slideIn 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
         }
 
-        @keyframes slideIn {
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--coral);
+            animation: confettiFall 4s linear infinite;
+            z-index: 5;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--sunset) 50%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            letter-spacing: 0.02em;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.3); }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--champagne);
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -49,284 +139,331 @@
             }
         }
 
-        .header {
-            background: linear-gradient(135deg, var(--sunrise) 0%, var(--coral) 100%);
-            padding: 3rem 2rem;
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--turquoise);
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sun-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            animation: sunrise 3s ease-in-out infinite;
-            display: inline-block;
-        }
-
-        @keyframes sunrise {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.1); }
-        }
-
-        .header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .header p {
-            font-size: 1.5rem;
-            color: var(--warm-cream);
-            font-weight: 300;
-        }
-
-        .content {
-            padding: 3rem 2rem;
-        }
-
-        .celebration-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--coral);
-            text-align: center;
-            margin-bottom: 2rem;
-            line-height: 1.4;
-        }
-
-        .details-box {
-            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--warm-cream) 100%);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 3px solid var(--sunrise);
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            color: #333;
-        }
-
-        .detail-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .detail-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-            min-width: 2.5rem;
-        }
-
-        .detail-text {
+            max-width: 800px;
+            margin-bottom: 3rem;
             line-height: 1.6;
-        }
-
-        .detail-label {
-            font-weight: 700;
-            color: var(--coral);
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-
-        .catchy-line {
-            background: var(--gold);
-            color: #333;
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 2rem 0;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-            font-style: italic;
-        }
-
-        .rsvp-section {
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .rsvp-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--coral) 0%, var(--sunrise) 100%);
-            color: white;
-            padding: 1.5rem 4rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(255, 127, 80, 0.4);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
+            animation: fadeInUp 1s ease-out 0.8s both;
+            font-weight: 300;
             letter-spacing: 0.05em;
         }
 
-        .rsvp-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 127, 80, 0.6);
+        .event-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 1.2s both;
+            margin-bottom: 3rem;
         }
 
-        .contact-info {
+        .event-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--deep-blue);
             text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            color: #666;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
         }
 
-        .contact-info strong {
+        .details-prose {
+            color: #333;
+            font-size: 1.3rem;
+            line-height: 2;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .details-prose strong {
+            color: var(--deep-blue);
+            font-weight: 600;
+        }
+
+        .details-prose .highlight {
             color: var(--coral);
+            font-weight: 600;
+        }
+
+        .venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            text-align: center;
+            margin: 2rem 0 1rem;
+            font-weight: 700;
+        }
+
+        .venue-address {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .special-note {
+            background: linear-gradient(135deg, var(--sunset) 0%, var(--coral) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2.5rem 0;
+            font-style: italic;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .milestone-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--gold);
+            text-align: center;
+            margin: 2.5rem 0;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .cta-container {
+            display: flex;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 1.5s both;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            position: relative;
+            padding: 1.5rem 4rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--sunset) 0%, var(--coral) 100%);
+            color: white;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.6);
+        }
+
+        .contact-section {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .contact-section strong {
+            color: var(--deep-blue);
+        }
+
+        .contact-section a {
+            color: var(--turquoise);
+            text-decoration: none;
+            border-bottom: 1px solid var(--turquoise);
+            transition: all 0.3s ease;
+        }
+
+        .contact-section a:hover {
+            color: var(--coral);
+            border-color: var(--coral);
+        }
+
+        .date-banner {
+            margin-top: 3rem;
+            padding: 2rem 4rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 1.8s both;
+        }
+
+        .date-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--gold);
+            text-align: center;
+            font-weight: 700;
         }
 
         .footer {
+            margin-top: 2rem;
             text-align: center;
-            padding: 2rem;
-            color: #999;
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            animation: fadeInUp 1s ease-out 2s both;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
+            .event-section {
+                padding: 2rem 1.5rem;
             }
 
-            .celebration-text {
-                font-size: 1.6rem;
-            }
-
-            .detail-item {
+            .details-prose {
                 font-size: 1.1rem;
+                line-height: 1.8;
             }
 
-            .detail-icon {
-                font-size: 1.5rem;
-            }
-
-            .catchy-line {
+            .special-note {
                 font-size: 1.2rem;
+                padding: 1.5rem;
             }
 
-            .rsvp-button {
+            .cta-button {
                 padding: 1.2rem 3rem;
                 font-size: 1.2rem;
             }
 
-            .content {
-                padding: 2rem 1.5rem;
+            .date-banner {
+                padding: 1.5rem 2rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
+    <div class="spotlight"></div>
+    <div class="spotlight" style="animation-delay: 3s; animation-duration: 18s;"></div>
+    
     <div class="container">
-        <div class="header">
-            <div class="sun-icon">☀️</div>
-            <h1>Breakfast Celebration</h1>
-            <p>Join us for a cozy morning feast!</p>
-        </div>
-
-        <div class="content">
-            <p class="celebration-text">
-                Wayne is turning 50 and we're starting the day right!
-            </p>
-
-            <div class="details-box">
-                <div class="detail-item">
-                    <span class="detail-icon">🗓️</span>
-                    <div class="detail-text">
-                        <span class="detail-label">Date</span>
-                        Friday, July 11, 2026
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <span class="detail-icon">⏰</span>
-                    <div class="detail-text">
-                        <span class="detail-label">Time</span>
-                        07:30 for 08:00 (Arrive at 7:30, breakfast at 8:00)
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <span class="detail-icon">📍</span>
-                    <div class="detail-text">
-                        <span class="detail-label">Venue</span>
-                        Infinity Restaurant<br>
-                        Sky Hotel, Cape Town
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <span class="detail-icon">🍳</span>
-                    <div class="detail-text">
-                        <span class="detail-label">Style</span>
-                        Buffet Breakfast - Relaxed & Cozy
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <span class="detail-icon">👕</span>
-                    <div class="detail-text">
-                        <span class="detail-label">Dress Code</span>
-                        Very Casual - Come Comfortable!
-                    </div>
-                </div>
+        <h1 class="main-title floating">THE BIG 50</h1>
+        <h2 class="subtitle">Prepare for a Legendary Celebration</h2>
+        <p class="tagline">
+            Wayne Sylvester is turning 50, and it's going to be EPIC!
+        </p>
+        
+        <div class="event-section">
+            <h3 class="event-title">Morning Celebration</h3>
+            
+            <div class="details-prose">
+                Join us for an <strong>exclusive breakfast celebration</strong> at one of Cape Town's most iconic venues.
+                Start the day with <span class="highlight">spectacular views</span>, delicious food, and the people who matter most.
             </div>
 
-            <div class="catchy-line">
-                "No gifts required – your presence is the present! 🎁"
+            <div class="venue-name">Infinity Restaurant</div>
+            <div class="venue-address">
+                26th Floor, Hotel Sky<br>
+                9 Lower Long Street, Cape Town
             </div>
 
-            <div class="rsvp-section">
-                <a href="https://forms.gle/YOUR_BREAKFAST_FORM_ID" class="rsvp-button">
-                    RSVP Now
+            <div class="details-prose">
+                <strong>Friday, 11 July 2026</strong><br>
+                Arrive at <span class="highlight">7:30 AM</span> for <span class="highlight">8:00 AM</span> breakfast<br>
+                <strong>Dress Code:</strong> Very Casual
+            </div>
+
+            <div class="special-note">
+                No gifts required — your presence is the present
+            </div>
+
+            <div class="milestone-text">
+                One Unforgettable Milestone
+            </div>
+
+            <div class="cta-container">
+                <a href="https://forms.gle/YOUR_BREAKFAST_FORM_ID" class="cta-button" target="_blank">
+                    <span>RSVP Now</span>
                 </a>
             </div>
 
-            <div class="contact-info">
-                <strong>Questions?</strong> WhatsApp Wayne at<br>
-                <strong>+31 61 3870928</strong><br>
-                <a href="mailto:wsylvester@gmail.com" style="color: var(--coral); text-decoration: none;">wsylvester@gmail.com</a>
+            <div class="contact-section">
+                <strong>Questions?</strong><br>
+                WhatsApp Wayne at <strong>+31 61 3870928</strong><br>
+                <a href="mailto:wsylvester@gmail.com">wsylvester@gmail.com</a>
             </div>
         </div>
 
+        <div class="date-banner">
+            <p class="date-text">July 11, 2026</p>
+        </div>
+
         <div class="footer">
-            See you at sunrise! 🌅
+            Celebrating 50 Years of Awesome
         </div>
     </div>
 
     <script>
-        // Add a touch of sparkle on mobile tap
-        document.addEventListener('touchstart', function(e) {
-            const touch = e.touches[0];
-            const sparkle = document.createElement('div');
-            sparkle.innerHTML = '✨';
-            sparkle.style.position = 'fixed';
-            sparkle.style.left = touch.pageX + 'px';
-            sparkle.style.top = touch.pageY + 'px';
-            sparkle.style.fontSize = '2rem';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.animation = 'sparkleFloat 1s ease-out forwards';
-            document.body.appendChild(sparkle);
-            
-            setTimeout(() => sparkle.remove(), 1000);
-        });
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
 
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkleFloat {
-                0% { transform: translateY(0) scale(1); opacity: 1; }
-                100% { transform: translateY(-50px) scale(0); opacity: 0; }
+        // Create confetti
+        function createConfetti() {
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 4 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                
+                const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#D4AF37'];
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 8000);
             }
-        `;
-        document.head.appendChild(style);
+        }
+
+        setInterval(createConfetti, 2000);
+        createConfetti();
     </script>
 </body>
 </html>
