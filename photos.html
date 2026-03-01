@@ -276,19 +276,28 @@
         const SLIDE_DURATION = 5000; // 5 seconds per photo
         const TRANSITIONS = ['zoom-in', 'zoom-out', 'pan-left', 'pan-right'];
         
-        // Photo captions (optional - add your own)
+        // ============================================
+        // EASY PHOTO MANAGEMENT
+        // ============================================
+        // Just upload photos named: photo1.jpg, photo2.jpg, photo3.jpg, etc.
+        // Then change this number to match your total photos:
+        const TOTAL_PHOTOS = 2; // Change this to your total number of photos
+        
+        // The script will automatically show: photo1.jpg, photo2.jpg... up to your total
+        // ============================================
+
+        // Photo captions (optional - add if you want)
         const CAPTIONS = {
-            // Example: 'photo1.jpg': 'Wayne at 5 years old',
-            // Add your own captions here matching your image filenames
+            'photo1.jpg': '', // Add caption here if you want
+            'photo2.jpg': '',
+            // etc...
         };
 
-        // List your photo filenames here
-        // When you upload photos, add them to this array
-        const PHOTOS = [
-            'images/WIN_20230725_13_03_19_Pro.jpg',
-            'images/WIN_20230725_13_04_32_Pro.jpg',
-            // Add more photos here as you upload them
-        ];
+        // Auto-generate photo list based on TOTAL_PHOTOS
+        const PHOTOS = [];
+        for (let i = 1; i <= TOTAL_PHOTOS; i++) {
+            PHOTOS.push(`images/photo${i}.jpg`);
+        }
 
         let currentIndex = 0;
         let slideInterval;
