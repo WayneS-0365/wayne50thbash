@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evening Soirée - Wayne's 50th</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥂</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -26,6 +27,21 @@
             overflow-x: hidden;
             background: linear-gradient(135deg, var(--deep-blue) 0%, #2C3E50 100%);
             min-height: 100vh;
+            position: relative;
+        }
+
+        /* Background Image Overlay */
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(26, 83, 92, 0.7), rgba(44, 62, 80, 0.85)), 
+                        url('/mnt/user-data/uploads/1772346125964_image.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
         }
 
         .stars {
@@ -56,7 +72,7 @@
             position: fixed;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(255, 230, 109, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 230, 109, 0.1) 0%, transparent 70%);
             pointer-events: none;
             z-index: 2;
             animation: spotlightSweep 15s ease-in-out infinite;
@@ -75,7 +91,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 2rem 1rem;
         }
 
         .confetti {
@@ -100,32 +116,34 @@
 
         .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 12vw, 8rem);
+            font-size: clamp(3rem, 15vw, 8rem);
             font-weight: 900;
             text-align: center;
             background: linear-gradient(135deg, var(--gold) 0%, var(--sunset) 50%, var(--coral) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
-            animation: titleGlow 3s ease-in-out infinite alternate;
+            margin-bottom: 0.5rem;
+            animation: titleGlow 3s ease-in-out infinite alternate, fadeInUp 1s ease-out both;
             letter-spacing: 0.02em;
+            text-shadow: 0 0 60px rgba(212, 175, 55, 0.8);
         }
 
         @keyframes titleGlow {
-            0% { filter: brightness(1); }
-            100% { filter: brightness(1.3); }
+            0% { filter: brightness(1) drop-shadow(0 0 20px rgba(212, 175, 55, 0.5)); }
+            100% { filter: brightness(1.3) drop-shadow(0 0 40px rgba(212, 175, 55, 0.8)); }
         }
 
         .subtitle {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-size: clamp(1.5rem, 5vw, 3rem);
             font-weight: 400;
             font-style: italic;
             color: var(--champagne);
             text-align: center;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.5s both;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes fadeInUp {
@@ -140,47 +158,61 @@
         }
 
         .tagline {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-size: clamp(1.1rem, 4vw, 1.8rem);
             color: var(--turquoise);
             text-align: center;
-            max-width: 800px;
-            margin-bottom: 3rem;
+            max-width: 90%;
+            margin-bottom: 2rem;
             line-height: 1.6;
-            animation: fadeInUp 1s ease-out 0.8s both;
+            animation: fadeInUp 1s ease-out 0.5s both;
             font-weight: 300;
             letter-spacing: 0.05em;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
         }
 
-        .event-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 3rem;
-            max-width: 900px;
+        .exclusive-badge {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--sunset) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.6);
+            border: 2px solid var(--champagne);
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .event-content {
+            max-width: 700px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease-out 1.2s both;
-            margin-bottom: 3rem;
+            padding: 0 1rem;
+            animation: fadeInUp 1s ease-out 0.9s both;
         }
 
         .event-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: var(--deep-blue);
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--gold);
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-weight: 700;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
         }
 
         .details-prose {
-            color: #333;
-            font-size: 1.3rem;
-            line-height: 2;
+            color: white;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            line-height: 1.8;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
         }
 
         .details-prose strong {
-            color: var(--deep-blue);
+            color: var(--sunset);
             font-weight: 600;
         }
 
@@ -191,67 +223,78 @@
 
         .venue-name {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--gold);
+            font-size: clamp(2rem, 6vw, 3rem);
             text-align: center;
-            margin: 2rem 0 1rem;
+            margin: 2rem 0 0.5rem;
             font-weight: 700;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
         }
 
         .venue-link {
-            color: var(--turquoise);
+            color: var(--gold);
             text-decoration: none;
-            border-bottom: 2px solid var(--turquoise);
+            border-bottom: 2px solid var(--gold);
             transition: all 0.3s ease;
         }
 
         .venue-link:hover {
-            color: var(--coral);
-            border-color: var(--coral);
+            color: var(--sunset);
+            border-color: var(--sunset);
         }
 
         .venue-address {
             text-align: center;
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
+            color: var(--champagne);
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            margin-bottom: 2rem;
             line-height: 1.6;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
         }
 
         .special-note {
-            background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.95) 0%, rgba(26, 83, 92, 0.95) 100%);
             color: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 20px;
             text-align: center;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
             font-weight: 600;
-            margin: 2.5rem 0;
+            margin: 2rem 0;
             font-style: italic;
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--turquoise);
+        }
+
+        .rsvp-deadline {
+            color: var(--sunset);
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            text-align: center;
+            margin: 1.5rem 0;
+            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
         }
 
         .milestone-text {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
             color: var(--gold);
             text-align: center;
-            margin: 2.5rem 0;
+            margin: 2rem 0 1.5rem;
             font-weight: 700;
             font-style: italic;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
         }
 
         .cta-container {
             display: flex;
             justify-content: center;
-            animation: fadeInUp 1s ease-out 1.5s both;
-            margin-top: 2rem;
+            margin: 2rem 0;
         }
 
         .cta-button {
             position: relative;
-            padding: 1.5rem 4rem;
-            font-size: 1.4rem;
+            padding: 1.3rem 3.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -263,7 +306,7 @@
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
             color: white;
-            box-shadow: 0 10px 40px rgba(78, 205, 196, 0.4);
+            box-shadow: 0 10px 40px rgba(78, 205, 196, 0.6);
         }
 
         .cta-button::before {
@@ -291,20 +334,21 @@
 
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(78, 205, 196, 0.6);
+            box-shadow: 0 15px 50px rgba(78, 205, 196, 0.8);
         }
 
         .contact-section {
             text-align: center;
-            margin-top: 2.5rem;
-            padding-top: 2.5rem;
-            border-top: 2px solid #e0e0e0;
-            color: #666;
-            font-size: 1.1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--champagne);
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
         }
 
         .contact-section strong {
-            color: var(--deep-blue);
+            color: var(--sunset);
         }
 
         .contact-section a {
@@ -320,38 +364,29 @@
         }
 
         .date-banner {
-            margin-top: 3rem;
-            padding: 2rem 4rem;
-            background: rgba(212, 175, 55, 0.1);
+            margin-top: 2rem;
+            padding: 1.5rem 2.5rem;
+            background: rgba(212, 175, 55, 0.2);
             border: 2px solid var(--gold);
             border-radius: 20px;
             backdrop-filter: blur(10px);
-            animation: fadeInUp 1s ease-out 1.8s both;
         }
 
         .date-text {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             color: var(--gold);
             text-align: center;
             font-weight: 700;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
         }
 
         .footer {
             margin-top: 2rem;
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-            animation: fadeInUp 1s ease-out 2s both;
-        }
-
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            color: rgba(255, 255, 255, 0.7);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
         }
 
         /* Password Modal */
@@ -362,11 +397,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .password-modal.active {
@@ -374,13 +409,15 @@
         }
 
         .password-box {
-            background: white;
+            background: linear-gradient(135deg, rgba(26, 83, 92, 0.98) 0%, rgba(44, 62, 80, 0.98) 100%);
+            border: 3px solid var(--gold);
             border-radius: 30px;
-            padding: 3rem 2.5rem;
+            padding: 2.5rem 2rem;
             max-width: 500px;
             width: 100%;
             text-align: center;
             animation: slideIn 0.5s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes slideIn {
@@ -396,39 +433,50 @@
 
         .password-box h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--deep-blue);
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            color: var(--gold);
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
         }
 
-        .password-box p {
-            color: #666;
+        .password-box .cryptic-message {
+            color: var(--champagne);
             margin-bottom: 2rem;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .password-box .warning {
+            color: var(--coral);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
         }
 
         .password-input {
             width: 100%;
-            padding: 1.2rem;
-            font-size: 1.2rem;
+            padding: 1.1rem;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
             border: 3px solid var(--turquoise);
             border-radius: 15px;
             margin-bottom: 1rem;
             text-align: center;
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.3em;
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .password-input:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
         }
 
         .password-submit {
             width: 100%;
-            padding: 1.2rem;
-            font-size: 1.2rem;
+            padding: 1.1rem;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
             font-weight: 700;
             background: linear-gradient(135deg, var(--turquoise) 0%, var(--deep-blue) 100%);
             color: white;
@@ -442,27 +490,28 @@
 
         .password-submit:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.6);
         }
 
         .error-message {
             color: var(--coral);
             margin-top: 1rem;
-            font-size: 1rem;
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
             display: none;
+            font-weight: 600;
         }
 
         .close-modal {
             background: none;
             border: none;
-            font-size: 2rem;
-            color: #999;
+            font-size: 2.5rem;
+            color: var(--champagne);
             cursor: pointer;
             position: absolute;
             top: 1rem;
             right: 1rem;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -471,49 +520,51 @@
         }
 
         .close-modal:hover {
-            background: #f0f0f0;
-            color: #333;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
         @media (max-width: 768px) {
-            .event-section {
-                padding: 2rem 1.5rem;
-            }
-
-            .details-prose {
-                font-size: 1.1rem;
-                line-height: 1.8;
+            .container {
+                padding: 1.5rem 0.75rem;
             }
 
             .special-note {
-                font-size: 1.2rem;
-                padding: 1.5rem;
+                padding: 1.2rem;
             }
 
             .cta-button {
-                padding: 1.2rem 3rem;
-                font-size: 1.2rem;
+                padding: 1.1rem 2.5rem;
             }
 
             .date-banner {
-                padding: 1.5rem 2rem;
+                padding: 1.2rem 1.5rem;
+            }
+
+            .password-box {
+                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="hero-background"></div>
     <div class="stars" id="stars"></div>
     <div class="spotlight"></div>
     <div class="spotlight" style="animation-delay: 3s; animation-duration: 18s;"></div>
     
     <div class="container">
-        <h1 class="main-title floating">THE BIG 50</h1>
+        <h1 class="main-title">THE BIG 50</h1>
         <h2 class="subtitle">Prepare for a Legendary Celebration</h2>
         <p class="tagline">
             Wayne Sylvester is turning 50, and it's going to be EPIC!
         </p>
+
+        <div class="exclusive-badge">
+            Your Exclusive Invitation
+        </div>
         
-        <div class="event-section">
+        <div class="event-content">
             <h3 class="event-title">Evening Soirée</h3>
             
             <div class="details-prose">
@@ -521,7 +572,9 @@
                 As the sun sets over the city, we'll toast to <span class="highlight">five decades of memories</span> and the adventures still to come.
             </div>
 
-            <div class="venue-name"><a href="https://theterracerooftop.co.za" target="_blank" class="venue-link">The Terrace Rooftop</a></div>
+            <div class="venue-name">
+                <a href="https://theterracerooftop.co.za" target="_blank" class="venue-link">The Terrace Rooftop</a>
+            </div>
             <div class="venue-address">
                 Cape Town
             </div>
@@ -537,13 +590,17 @@
                 No gifts allowed — Just bring your appetite & good vibes
             </div>
 
+            <div class="rsvp-deadline">
+                Please RSVP by 30 April 2026
+            </div>
+
             <div class="milestone-text">
                 One Unforgettable Milestone
             </div>
 
             <div class="cta-container">
                 <button class="cta-button" onclick="showPasswordModal()">
-                    <span>RSVP Now</span>
+                    <span>Accept Invitation</span>
                 </button>
             </div>
 
@@ -567,17 +624,22 @@
     <div class="password-modal" id="passwordModal">
         <div class="password-box" style="position: relative;">
             <button class="close-modal" onclick="closePasswordModal()">×</button>
-            <h2>RSVP Access</h2>
-            <p>Enter the password to submit your RSVP</p>
+            <h2>Access Required</h2>
+            <p class="cryptic-message">
+                To confirm your attendance, enter your personal access code.
+            </p>
+            <p class="warning">
+                This code is confidential. Do not share.
+            </p>
             <input 
                 type="password" 
                 id="passwordInput" 
                 class="password-input" 
-                placeholder="Enter password"
+                placeholder="Enter code"
                 autocomplete="off"
             >
             <button class="password-submit" onclick="checkPassword()">Continue</button>
-            <p class="error-message" id="errorMessage">Incorrect password. Try again!</p>
+            <p class="error-message" id="errorMessage">Access denied. Please try again.</p>
         </div>
     </div>
 
@@ -595,7 +657,7 @@
 
         // Create confetti
         function createConfetti() {
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 15; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
